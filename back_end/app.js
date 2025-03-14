@@ -9,7 +9,7 @@ const axios = require("axios");
 app.use(cors());
 
 const PORT = 3000;
-const ZIP_URL = "https://raw.githubusercontent.com/kiki3177/NYC-Taxi-Map-Web/refs/heads/main/data-share/data.zip";
+const ZIP_URL = "https://raw.githubusercontent.com/open-devsecops/topic-2-lab-reference-app-azure/refs/heads/main/data_share/data.zip";
 const ZIP_PATH = path.join(__dirname, "repo.zip");
 const EXTRACT_PATH = __dirname;
 

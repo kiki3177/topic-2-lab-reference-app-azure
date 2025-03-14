@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "config_env": "npm install",
+    "run_server": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "axios": "^1.8.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

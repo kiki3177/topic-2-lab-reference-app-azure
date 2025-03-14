@@ -1,0 +1,5 @@
+.mapboxgl-popup-content {
+    background: transparent !important; /* Remove default white background */
+    box-shadow: none !important; /* Remove any default shadow */
+    padding: 0 !important; /* Remove extra padding */
+}

@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'mcr.microsoft.com/azure-cli'
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Needed if you're using Docker inside
-        }
-    }
+    agent any
     
     environment {
         ACR_NAME = 'kikihe'
@@ -17,12 +12,18 @@ pipeline {
     }
 
     stages {
-        stage('Test Azure CLI') {
+        stage('Run Azure CLI in Docker') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/azure-cli'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock'
+                }
+            }
             steps {
-                sh 'az version'
+                sh 'az --version'
             }
         }
-        
+                
         stage('Login to Azure') {
             steps {
                 sh '''

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "install_env": "npm install",
-    "start": "export PORT=8000 && react-scripts start",
+    "start": "export PORT=8080 && react-scripts start",
     "build": "react-scripts build"
   },
   "eslintConfig": {

@@ -30,11 +30,11 @@ pipeline {
 
         stage('Build Frontend & Backend') {
             steps {
-                dir('frontend') {
+                dir('front_end') {
                     sh 'docker build -t $IMAGE_NAME_FRONTEND .'
                     sh 'docker tag $IMAGE_NAME_FRONTEND $ACR_LOGIN_SERVER/$IMAGE_NAME_FRONTEND'
                 }
-                dir('backend') {
+                dir('back_end') {
                     sh 'docker build -t $IMAGE_NAME_BACKEND .'
                     sh 'docker tag $IMAGE_NAME_BACKEND $ACR_LOGIN_SERVER/$IMAGE_NAME_BACKEND'
                 }

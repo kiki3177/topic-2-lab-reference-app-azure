@@ -13,16 +13,15 @@ pipeline {
 
     stages {
         stage('Run Azure CLI in Docker') {
-            agent {
-                docker {
-                    image 'mcr.microsoft.com/azure-cli'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock'
+            steps {
+                script {
+                    docker.image('mcr.microsoft.com/azure-cli').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
+                        sh 'az --version'
+                    }
                 }
             }
-            steps {
-                sh 'az --version'
-            }
         }
+
                 
         stage('Login to Azure') {
             steps {

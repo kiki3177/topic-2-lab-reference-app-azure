@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Run Azure CLI in Docker') {
             steps {
-                sh 'az --version'
+                sh '/root/.local/bin/az --version'
             }
         }
 
@@ -22,8 +22,8 @@ pipeline {
         stage('Login to Azure') {
             steps {
                 sh '''
-                az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
-                az acr login --name $ACR_NAME
+                /root/.local/bin/az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+                /root/.local/bin/az acr login --name $ACR_NAME
                 '''
             }
         }

@@ -33,7 +33,7 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(
-                            credentialsId: 'jenkins-acr-scope-map-cred',  // Match the ID you set in Jenkins.
+                            credentialsId: 'jenkins-acr-scope-map-cred',  // Match the ID you set in Jenkins
                             usernameVariable: 'ACR_USER',
                             passwordVariable: 'ACR_PASS'
                         )

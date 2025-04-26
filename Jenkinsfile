@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        AZURE_ACR_NAME = 'labacrdevops3'
-        IMAGE_NAME_FRONTEND = 'opendevops-nyctaxiweb-frontend'
-        IMAGE_NAME_BACKEND = 'opendevops-nyctaxiweb-backend'
+        AZURE_ACR_NAME = 'labacrdevops'
+        IMAGE_NAME_FRONTEND = 'opendevops-nyctaxiweb-frontend:v1.0.0'
+        IMAGE_NAME_BACKEND = 'opendevops-nyctaxiweb-backend:v1.0.0'
         ACR_LOGIN_SERVER = "${AZURE_ACR_NAME}.azurecr.io"
     }
 
@@ -33,7 +33,7 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(
-                            credentialsId: 'jenkins-acr-scope-map-cred',  // Match the ID you set in Jenkins
+                            credentialsId: 'a61ba484-1afa-4940-851a-548d2be2f37f',  // Match the ID you set in Jenkins
                             usernameVariable: 'ACR_USER',
                             passwordVariable: 'ACR_PASS'
                         )
@@ -65,12 +65,12 @@ pipeline {
                 sh 'docker rm -f backend || echo "No backend container to remove"'
                 
                 // Check what's using our ports
-                sh 'netstat -tuln | grep 9090 || echo "Port 9090 is free"'
-                sh 'netstat -tuln | grep 3001 || echo "Port 3001 is free"'
+                sh 'netstat -tuln | grep 8080 || echo "Port 8080 is free"'
+                sh 'netstat -tuln | grep 3000 || echo "Port 3000 is free"'
                 
                 // Run with less common ports
-                sh 'docker run -d --name frontend -p 9090:80 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_FRONTEND}'
-                sh 'docker run -d --name backend -p 3001:3000 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_BACKEND}'
+                sh 'docker run -d --name frontend -p 8080:80 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_FRONTEND}'
+                sh 'docker run -d --name backend -p 3000:3000 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_BACKEND}'
                 
                 // Verify the containers are running
                 sh 'docker ps'

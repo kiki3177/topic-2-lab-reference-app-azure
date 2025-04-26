@@ -6,6 +6,8 @@ pipeline {
         IMAGE_NAME_FRONTEND = 'opendevops-nyctaxiweb-frontend:v1.0.0'
         IMAGE_NAME_BACKEND = 'opendevops-nyctaxiweb-backend:v1.0.0'
         ACR_LOGIN_SERVER = "${AZURE_ACR_NAME}.azurecr.io"
+        ACR_USER = 'StudentToken'
+        ACR_PASS = credentials('token')
     }
 
     stages {
@@ -31,15 +33,8 @@ pipeline {
         stage('Push Image') {
             steps {
                 script {
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'jenkins-acr-scope-map-cred',  // Match the ID you set in Jenkins.
-                            usernameVariable: 'ACR_USER',
-                            passwordVariable: 'ACR_PASS'
-                        )
-                    ]) {
                         sh """
-                            docker login ${ACR_LOGIN_SERVER} -u \$ACR_USER -p \$ACR_PASS
+                            docker login ${ACR_LOGIN_SERVER} -u ${ACR_USER} -p ${ACR_PASS}
                             docker push ${ACR_LOGIN_SERVER}/${IMAGE_NAME_FRONTEND}
                             docker push ${ACR_LOGIN_SERVER}/${IMAGE_NAME_BACKEND}
                         """

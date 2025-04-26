@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                         sh """
-                            docker login ${ACR_LOGIN_SERVER} -u ${ACR_USER} -p ${ACR_PASS}
+                            docker login ${ACR_LOGIN_SERVER} -u $ACR_USER -p $ACR_PASS
                             docker push ${ACR_LOGIN_SERVER}/${IMAGE_NAME_FRONTEND}
                             docker push ${ACR_LOGIN_SERVER}/${IMAGE_NAME_BACKEND}
                         """

@@ -69,8 +69,8 @@ pipeline {
                 sh 'netstat -tuln | grep 3000 || echo "Port 3000 is free"'
                 
                 // Run with less common ports
-                sh 'docker run -d --name frontend -p 8080:80 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_FRONTEND}'
-                sh 'docker run -d --name backend -p 3000:3000 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_BACKEND}'
+                sh 'docker run -d --name frontend -p 8081:80 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_FRONTEND}'
+                sh 'docker run -d --name backend -p 3001:3000 ${ACR_LOGIN_SERVER}/${IMAGE_NAME_BACKEND}'
                 
                 // Verify the containers are running
                 sh 'docker ps'
